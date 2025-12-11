@@ -1,6 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, MapPin, Clock, ChevronRight, Plus, Edit2, Trash2, MessageCircle, Send, X } from 'lucide-react';
 
+// --- Video helpers ---
+const isDirectVideoUrl = (url) => {
+  if (!url) return false;
+  const lower = url.toLowerCase();
+  return (
+    lower.endsWith('.mp4') ||
+    lower.endsWith('.webm') ||
+    lower.endsWith('.ogg') ||
+    lower.includes('res.cloudinary.com')
+  );
+};
+
 const NeighbourhoodTable = () => {
   const [foods, setFoods] = useState([
     {
@@ -20,6 +32,7 @@ const NeighbourhoodTable = () => {
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [currentFood, setCurrentFood] = useState({
+    
     name: '',
     origin: '',
     region: '',
@@ -29,7 +42,12 @@ const NeighbourhoodTable = () => {
     prepTime: '',
     year: ''
   });
-  
+  // Video upload states
+const [isUploadingVideo, setIsUploadingVideo] = useState(false);
+const [videoUploadError, setVideoUploadError] = useState('');
+
+
+
   const [chatOpen, setChatOpen] = useState(false);
   const [chatMessages, setChatMessages] = useState([
     { role: 'assistant', content: 'Hey there! 👋 I love talking about food and the stories behind it. What are you curious about?' }
@@ -87,6 +105,43 @@ const NeighbourhoodTable = () => {
   const handleCancel = () => {
     setIsAdding(false);
     setIsEditing(false);
+  };
+  // Step 3 fix 
+  const handleVideoFileUpload = async (e) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
+
+  setVideoUploadError('');
+  setIsUploadingVideo(true);
+
+  try {
+    const formData = new FormData();
+    formData.append('file', file);
+      formData.append('upload_preset', 'unsigned_neighbourhood');
+     const res = await fetch(
+      'https://api.cloudinary.com/v1_1/dz4fwgw07/video/upload', // cloudinary name 
+      {
+        method: 'POST',
+        body: formData,
+      }
+    );
+
+      const data = await res.json();
+    console.log('Cloudinary response:', data);
+
+    if (!res.ok) {
+      const msg = data?.error?.message || 'Upload failed';
+      throw new Error(msg);
+    }
+
+    const videoUrl = data.secure_url;
+    setCurrentFood((prev) => ({ ...prev, videoUrl }));
+  } catch (err) {
+    console.error('Upload error:', err);
+    setVideoUploadError(err.message || 'Video upload failed. Please try again.');
+  } finally {
+    setIsUploadingVideo(false);
+  }
   };
 
   const handleSendMessage = async () => {
@@ -1089,15 +1144,39 @@ User: ${userInput}`
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Video URL</label>
-                  <input
-                    type="text"
-                    value={currentFood.videoUrl}
-                    onChange={(e) => setCurrentFood({...currentFood, videoUrl: e.target.value})}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
-                    placeholder="Paste your video URL here"
-                  />
-                </div>
+                 <label className="block text-sm font-semibold text-gray-700 mb-2">Upload Video</label>
+                 <input
+                type="file"
+               accept="video/*"
+              onChange={handleVideoFileUpload}
+               disabled={isUploadingVideo}
+    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+  />
+  {isUploadingVideo && (
+    <p className="text-orange-600 text-sm mt-2 flex items-center">
+      <span className="animate-spin mr-2">⏳</span> Uploading video... this may take a minute
+    </p>
+  )}
+  {videoUploadError && (
+    <p className="text-red-600 text-sm mt-2">❌ {videoUploadError}</p>
+  )}
+  {currentFood.videoUrl && !isUploadingVideo && !videoUploadError && (
+    <p className="text-green-600 text-sm mt-2">✓ Video uploaded successfully!</p>
+  )}
+</div>
+<div>
+  <label className="block text-sm font-semibold text-gray-700 mb-2">Or paste Video URL</label>
+  <input
+    type="text"
+    value={currentFood.videoUrl}
+    onChange={(e) => setCurrentFood({...currentFood, videoUrl: e.target.value})}
+    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+    placeholder="YouTube, Vimeo, or direct video link"
+  />
+  <p className="text-gray-500 text-xs mt-1">
+    You can upload a file above OR paste a video URL here
+  </p>
+</div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Thumbnail Image URL</label>
                   <input
