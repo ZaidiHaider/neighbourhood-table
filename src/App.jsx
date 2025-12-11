@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, MapPin, Clock, ChevronRight, Plus, Edit2, Trash2, MessageCircle, Send, X } from 'lucide-react';
 
+const CLOUDINARY_CLOUD_NAME = 'dz4f9wg07';          // 👈 exactly your cloud name
+const CLOUDINARY_UPLOAD_PRESET = 'unsigned_neighbourhood'; 
 // --- Video helpers ---
 const isDirectVideoUrl = (url) => {
   if (!url) return false;
