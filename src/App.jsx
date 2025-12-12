@@ -7,14 +7,15 @@ const NeighbourhoodTable = () => {
 const DEFAULT_FOODS = [
   {
     id: 1,
-    name: " Moujadara",
+    name: "Moujadara",
     origin: "Lebanon",
     region: "Middle East",
-    videoUrl: "https://res.cloudinary.com/dz4f9wg07/video/upload/v1765506594/qzqqnr8cprcpmwr2si29.mp4",
+    videoUrl:
+      "https://res.cloudinary.com/dz4f9wg07/video/upload/v1765506594/qzqqnr8cprcpmwr2si29.mp4",
     thumbnailUrl:
       "https://images.unsplash.com/photo-1606851090164-5db7e0bc9a3c?w=800&q=80",
     story:
-    "Moujadara is a traditional Lebanese dish made from lentils, rice, and caramelized onions. It’s simple, comforting, and packed with flavor. This dish has been enjoyed for generations as a nutritious, affordable meal that brings families together.",
+      "Moujadara is a traditional Lebanese dish made from lentils, rice, and caramelized onions. It’s simple, comforting, and packed with flavor. This dish has been enjoyed for generations as a nutritious, affordable meal that brings families together.",
     prepTime: "45 mins",
     year: "Traditional",
     recipeIngredients: `
@@ -22,26 +23,28 @@ const DEFAULT_FOODS = [
 1 cup rice
 1 onion
 Salt and pepper
-  `,
-  recipeSteps: `
+    `,
+    recipeSteps: `
 1. Boil the lentils until they are halfway cooked.
 2. Wash the rice well, then add it to the lentils with salt and pepper. Cover the pot and lower the heat.
 3. Caramelize the onion in a pan.
 4. Serve the Moujadara with the caramelized onions on top. It tastes great with yogurt if you have some.
-  `
+    `,
   },
   {
-  id: 2,
-  name: "Chickpea Curry",
-  origin: "South Asia",
-  region: "Global",
-  videoUrl: "https://res.cloudinary.com/dz4f9wg07/video/upload/v1765518528/ycbvg1lnhymnqeqtqvto.mp4",
-  thumbnailUrl: "https://images.unsplash.com/photo-1604909053194-9d61f2e83413?auto=format&w=800&q=80",
-  story:
-    "This recipe video breaks down how to make a quick, affordable chickpea curry using simple ingredients young people can actually find and cook with. It’s created for youth who may not have a lot of time, money, or kitchen access, but still want meals that taste good and feel familiar. The video keeps things easy, visual, and realistic—showing how one basic recipe can turn into a filling, nutritious meal while building confidence in the kitchen and encouraging independence around food choices.",
-  prepTime: "20 mins",
-  year: "Modern",
-  recipeIngredients: `
+    id: 2,
+    name: "Chickpea Curry",
+    origin: "South Asia",
+    region: "Global",
+    videoUrl:
+      "https://res.cloudinary.com/dz4f9wg07/video/upload/v1765518528/ycbvg1lnhymnqeqtqvto.mp4",
+    thumbnailUrl:
+      "https://images.unsplash.com/photo-1604909053194-9d61f2e83413?auto=format&w=800&q=80",
+    story:
+      "This recipe video breaks down how to make a quick, affordable chickpea curry using simple ingredients young people can actually find and cook with. It’s created for youth who may not have a lot of time, money, or kitchen access, but still want meals that taste good and feel familiar. The video keeps things easy, visual, and realistic—showing how one basic recipe can turn into a filling, nutritious meal while building confidence in the kitchen and encouraging independence around food choices.",
+    prepTime: "20 mins",
+    year: "Modern",
+    recipeIngredients: `
 1 can chickpeas
 1 onion
 2 cloves garlic
@@ -50,27 +53,29 @@ Salt and pepper
 1/2 cup water or broth
 Salt & pepper
 Oil
-  `,
-  recipeSteps: `
+    `,
+    recipeSteps: `
 1. Sauté chopped onions and garlic in a bit of oil.
 2. Add curry powder and stir until fragrant.
 3. Pour in tomato sauce and water/broth.
 4. Add chickpeas, salt, and pepper. Let simmer 10 minutes.
 5. Serve over rice, bread, or enjoy on its own.
-  `
-}
-{
-  id: 3,
-  name: "Chakry",
-  origin: "Gambia",
-  region: "West Africa",
-  videoUrl: "https://res.cloudinary.com/dz4f9wg07/video/upload/v1765519133/dml3qqvnvrnjxg5uvf9q.mp4",
-  thumbnailUrl: "https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&w=800&q=80",
-  story:
-    "Chakry is a traditional Gambian dessert served at cultural, social, and modern events. Loved across generations, it remains a staple dessert in Gambian households. Its creamy texture, refreshing taste, and simple ingredients make it a meaningful cultural dish enjoyed by all ages.",
-  prepTime: "45 mins",
-  year: "Traditional",
-  recipeIngredients: `
+    `,
+  },
+  {
+    id: 3,
+    name: "Chakry",
+    origin: "Gambia",
+    region: "West Africa",
+    videoUrl:
+      "https://res.cloudinary.com/dz4f9wg07/video/upload/v1765519133/dml3qqvnvrnjxg5uvf9q.mp4",
+    thumbnailUrl:
+      "https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&w=800&q=80",
+    story:
+      "Chakry is a traditional Gambian dessert served at cultural, social, and modern events. Loved across generations, it remains a staple dessert in Gambian households. Its creamy texture, refreshing taste, and simple ingredients make it a meaningful cultural dish enjoyed by all ages.",
+    prepTime: "45 mins",
+    year: "Traditional",
+    recipeIngredients: `
 1 liter 2% milk
 1.3 kg yogurt or sour milk
 1 cup sugar
@@ -79,8 +84,8 @@ Shredded coconut
 Vanilla extract
 Water
 (Optional: raisins, nutmeg, shredded apples)
-  `,
-  recipeSteps: `
+    `,
+    recipeSteps: `
 1. Wash hands and use clean utensils.
 2. In a large bowl, mix water, milk, and yogurt/sour milk until you achieve your desired thickness.
 3. Add sugar to taste.
@@ -90,21 +95,22 @@ Water
 7. Prepare the couscous: add hot water, cover for 15 minutes, then stir. Microwave for 2 minutes once water is absorbed.
 8. Combine the couscous with the milk mixture and serve chilled or at room temperature.
 9. Note: Do not consume if lactose intolerant.
-  `
-}
-
-{
-  id: 4,
-  name: "Greek Lentil Soup (Fakes)",
-  origin: "Greece",
-  region: "Mediterranean",
-  videoUrl: "https://res.cloudinary.com/dz4f9wg07/video/upload/v1765519309/joukxck1azkazzxcxjqg.mp4",
-  thumbnailUrl: "https://images.unsplash.com/photo-1601050690597-df6f0a5c1e12?auto=format&w=800&q=80",
-  story:
-    "Greek Lentil Soup, known as 'Fakes,' is a simple yet comforting Mediterranean dish made with humble, wholesome ingredients. It has been enjoyed across Greek households for generations and is loved for its warmth, nourishment, and rich earthy flavour. It’s a recipe that feels just like a warm hug.",
-  prepTime: "40 mins",
-  year: "Traditional",
-  recipeIngredients: `
+    `,
+  },
+  {
+    id: 4,
+    name: "Greek Lentil Soup (Fakes)",
+    origin: "Greece",
+    region: "Mediterranean",
+    videoUrl:
+      "https://res.cloudinary.com/dz4f9wg07/video/upload/v1765519309/joukxck1azkazzxcxjqg.mp4",
+    thumbnailUrl:
+      "https://images.unsplash.com/photo-1601050690597-df6f0a5c1e12?auto=format&w=800&q=80",
+    story:
+      "Greek Lentil Soup, known as 'Fakes,' is a simple yet comforting Mediterranean dish made with humble, wholesome ingredients. It has been enjoyed across Greek households for generations and is loved for its warmth, nourishment, and rich earthy flavour. It’s a recipe that feels just like a warm hug.",
+    prepTime: "40 mins",
+    year: "Traditional",
+    recipeIngredients: `
 1 cup lentils
 1 onion, chopped
 2 cloves garlic, minced
@@ -115,8 +121,8 @@ Olive oil
 Salt and pepper
 Water or vegetable broth
 (Optional: vinegar for serving)
-  `,
-  recipeSteps: `
+    `,
+    recipeSteps: `
 1. Rinse the lentils thoroughly and set aside.
 2. In a pot, sauté the onion, garlic, and carrots in olive oil until softened.
 3. Add the tomato paste and stir for 1–2 minutes.
@@ -124,11 +130,10 @@ Water or vegetable broth
 5. Bring to a boil, then reduce heat and simmer for 30–35 minutes until lentils are tender.
 6. Adjust seasoning to taste.
 7. Serve warm, optionally adding a splash of vinegar for extra flavour.
-  `
-}
-
-
+    `,
+  },
 ];
+
 
 
 
