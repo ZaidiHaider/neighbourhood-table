@@ -1,6 +1,27 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, MapPin, Clock, ChevronRight, Plus, Edit2, Trash2, MessageCircle, Send, X } from 'lucide-react';
 
+// Default starter data used if nothing is in localStorage yet
+const NeighbourhoodTable = () => {
+
+const DEFAULT_FOODS = [
+  {
+    id: 1,
+    name: "Example Dish",
+    origin: "Country",
+    region: "City/Region",
+    videoUrl: "",
+    thumbnailUrl:
+      "https://images.unsplash.com/photo-1504674908074-0877df9cc836?w=800&q=80",
+    story:
+      "Click 'Edit' to add your own story about this dish's cultural heritage and history...",
+    prepTime: "30 mins",
+    year: "2024",
+  },
+];
+
+
+
 const CLOUDINARY_CLOUD_NAME = 'dz4f9wg07';          // 👈 exactly your cloud name
 const CLOUDINARY_UPLOAD_PRESET = 'unsigned_neighbourhood'; 
 // --- Video helpers ---
@@ -15,20 +36,24 @@ const isDirectVideoUrl = (url) => {
   );
 };
 
-const NeighbourhoodTable = () => {
-  const [foods, setFoods] = useState([
-    {
-      id: 1,
-      name: "Example Dish",
-      origin: "Country",
-      region: "City/Region",
-      videoUrl: "",
-      thumbnail: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80",
-      story: "Click 'Edit' to add your own story about this dish's cultural heritage and history...",
-      prepTime: "30 mins",
-      year: "2024"
-    }
-  ]);
+const [foods, setFoods] = useState(() => {
+  try {
+    const stored = localStorage.getItem("neighbourhoodFoods");
+    return stored ? JSON.parse(stored) : DEFAULT_FOODS;
+  } catch (err) {
+    console.error("Failed to read foods from localStorage:", err);
+    return DEFAULT_FOODS;
+  }
+});
+
+useEffect(() => {
+  try {
+    localStorage.setItem("neighbourhoodFoods", JSON.stringify(foods));
+  } catch (err) {
+    console.error("Failed to save foods:", err);
+  }
+}, [foods]);
+
   
   const [selectedFood, setSelectedFood] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
@@ -145,6 +170,9 @@ const [videoUploadError, setVideoUploadError] = useState('');
     setIsUploadingVideo(false);
   }
   };
+
+
+
 
   const handleSendMessage = async () => {
     if (!userInput.trim()) return;
