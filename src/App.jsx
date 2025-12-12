@@ -148,12 +148,33 @@ const isDirectVideoUrl = (url) => {
 const [foods, setFoods] = useState(() => {
   try {
     const stored = localStorage.getItem("neighbourhoodFoods");
-    return stored ? JSON.parse(stored) : DEFAULT_FOODS;
+
+    // 🔥 FIX: If stored value exists but does NOT contain IDs 1–4, reset it
+    if (stored) {
+      const parsed = JSON.parse(stored);
+
+      const hasDefaultFoods =
+        parsed.some(f => f.id === 1) &&
+        parsed.some(f => f.id === 2) &&
+        parsed.some(f => f.id === 3) &&
+        parsed.some(f => f.id === 4);
+
+      if (!hasDefaultFoods) {
+        console.log("Resetting localStorage → loading default dishes");
+        localStorage.removeItem("neighbourhoodFoods");
+        return DEFAULT_FOODS;
+      }
+
+      return parsed;
+    }
+
+    return DEFAULT_FOODS;
   } catch (err) {
     console.error("Failed to read foods from localStorage:", err);
     return DEFAULT_FOODS;
   }
 });
+
 
 useEffect(() => {
   try {
