@@ -92,6 +92,7 @@ Water
 9. Note: Do not consume if lactose intolerant.
   `
 }
+
 {
   id: 4,
   name: "Greek Lentil Soup (Fakes)",
@@ -147,33 +148,30 @@ const isDirectVideoUrl = (url) => {
 
 const [foods, setFoods] = useState(() => {
   try {
-    const stored = localStorage.getItem("neighbourhoodFoods");
+    const storedRaw = localStorage.getItem("neighbourhoodFoods");
 
-    // 🔥 FIX: If stored value exists but does NOT contain IDs 1–4, reset it
-    if (stored) {
-      const parsed = JSON.parse(stored);
-
-      const hasDefaultFoods =
-        parsed.some(f => f.id === 1) &&
-        parsed.some(f => f.id === 2) &&
-        parsed.some(f => f.id === 3) &&
-        parsed.some(f => f.id === 4);
-
-      if (!hasDefaultFoods) {
-        console.log("Resetting localStorage → loading default dishes");
-        localStorage.removeItem("neighbourhoodFoods");
-        return DEFAULT_FOODS;
-      }
-
-      return parsed;
+    if (!storedRaw) {
+      // First time visitor: just use all defaults
+      return DEFAULT_FOODS;
     }
 
-    return DEFAULT_FOODS;
+    const stored = JSON.parse(storedRaw);
+    const storedArray = Array.isArray(stored) ? stored : [];
+
+    // Make sure all default dishes (id 1–4) are present
+    const existingIds = new Set(storedArray.map((f) => f.id));
+    const missingDefaults = DEFAULT_FOODS.filter(
+      (f) => !existingIds.has(f.id)
+    );
+
+    // Defaults first, then any stored/added dishes
+    return [...missingDefaults, ...storedArray];
   } catch (err) {
     console.error("Failed to read foods from localStorage:", err);
     return DEFAULT_FOODS;
   }
 });
+
 
 
 useEffect(() => {
@@ -183,6 +181,7 @@ useEffect(() => {
     console.error("Failed to save foods:", err);
   }
 }, [foods]);
+
 
   
   const [selectedFood, setSelectedFood] = useState(null);
