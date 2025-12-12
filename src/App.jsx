@@ -7,16 +7,28 @@ const NeighbourhoodTable = () => {
 const DEFAULT_FOODS = [
   {
     id: 1,
-    name: "Example Dish",
-    origin: "Country",
-    region: "City/Region",
-    videoUrl: "",
+    name: " Moujadara",
+    origin: "Lebanon",
+    region: "Middle East",
+    videoUrl: "https://res.cloudinary.com/dz4f9wg07/video/upload/v1765506594/qzqqnr8cprcpmwr2si29.mp4",
     thumbnailUrl:
-      "https://images.unsplash.com/photo-1504674908074-0877df9cc836?w=800&q=80",
+      "https://images.unsplash.com/photo-1606851090164-5db7e0bc9a3c?w=800&q=80",
     story:
-      "Click 'Edit' to add your own story about this dish's cultural heritage and history...",
-    prepTime: "30 mins",
-    year: "2024",
+    "Moujadara is a traditional Lebanese dish made from lentils, rice, and caramelized onions. It’s simple, comforting, and packed with flavor. This dish has been enjoyed for generations as a nutritious, affordable meal that brings families together.",
+    prepTime: "45 mins",
+    year: "Traditional",
+    recipeIngredients: `
+1 cup lentils
+1 cup rice
+1 onion
+Salt and pepper
+  `,
+  recipeSteps: `
+1. Boil the lentils until they are halfway cooked.
+2. Wash the rice well, then add it to the lentils with salt and pepper. Cover the pot and lower the heat.
+3. Caramelize the onion in a pan.
+4. Serve the Moujadara with the caramelized onions on top. It tastes great with yogurt if you have some.
+  `
   },
 ];
 
